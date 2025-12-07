@@ -6,49 +6,69 @@
       ./hardware-configuration.nix
     ];
 
+  ## Boot / System basics
 
-boot.loader.systemd-boot.enable = true;
-boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  networking = {
+    hostname = "nix";
+    networkmanager.enable = true;
+  };
 
-networking.hostName = "nix"; # hostname.
-networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  time.timeZone = "Europe/Oslo";
 
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
-# Time zone.
-time.timeZone = "Europe/Oslo";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+  nixpkgs.allowUnfree = true;
+  system.stateVersion = "25.05";
 
-services.xserver = {
+  ## Graphics / Display / Window manager(s)
+  services.xserver = {
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
     windowManager.i3.enable = true;
-};
-services.displayManager.ly.enable = true;
+  };
+  services.displayManager.ly.enable = true;
 
-users.users.andre = {
-  isNormalUser = true;
-  extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  packages = with pkgs; [
-    tree
-  ];
-};
+  hardware.graphics = {
+	  enable = true;
+	  enable32Bit = true;
+  };
+  
+  hardware.nvidia = {
+    modesetting.enable = true;
+	  powerManagement.enable = true;
+	  open = false;
+	  package = config.boot.kernelPackages.nvidiaPackages.production;
+  };
 
-environment.systemPackages = with pkgs; [
-    # programs
-  wget
-  librewolf
-  firefox
-  kitty
-  pavucontrol
-  tree-sitter
+  ## Audio
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
+  services.pulseaudio.enable = false;
+  
+  ## Users
+  users.users.andre = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; 
+  };
+  ## System Packages
+  environment.systemPackages = with pkgs; [
+    wget
+    librewolf
+    firefox
+    kitty
+    pavucontrol
+    tree-sitter
     docker
     unzip
+    tree
     notepadqq ## notepad++ replica
     
     ## Tools required for Telescope(vim)
-    ripgrep
-    fd
-    fzf
     
     # language servers/languages
     rust-analyzer # rust
@@ -59,26 +79,19 @@ environment.systemPackages = with pkgs; [
     nodePackages.eslint_d
     lua-language-server 
     php
-    intelephense # php language server
     mysql84 
     lua
     nodejs
     python3
-    pyright ## Python lsp
     go
-    gopls ## golang lsp
-    postgresql
     mariadb
+    
    
     # programming
-    git
-    neovim
     vim
     gcc # compiler
-    docker
     
     ## torrents
-    stremio
     qbittorrent 
    
 
@@ -87,67 +100,45 @@ environment.systemPackages = with pkgs; [
     protonup
     htop
 ];
+  ## Services
+
+  programs.nix-ld.enable = true;
+  programs.git.enable = true;
+  programs.vim.enable = true;
+  programs.gamemode.enable = true; 
+  programs.steam.enable = true;
+
+  services.postgresql.enable = true;
+  services.picom.enable = true;
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mariadb;
+  };
   
-	
-system.stateVersion = "25.05"; 
-  
-
-# Enable unfree software
-nixpkgs.config = {
-	allowUnfree = true;
-};
-
-### audio
-services.pipewire.enable = false;
-services.pulseaudio.enable = true;
 
 
-programs.nix-ld.enable = true;
-programs.git.enable = true;
-programs.vim.enable = true;
-services.postgresql.enable = true;
-services.picom.enable = true;
 
-services.mysql = {
-   enable = true;
-   package = pkgs.mariadb;
-};
 
-programs.gamemode.enable = true; 
 
-  
-  ## drivers
-hardware.graphics = {
-	enable = true;
-	enable32Bit = true;
-};
+  services.xserver.videoDrivers = ["nvidia"];
 
-services.xserver.videoDrivers = ["nvidia"];
-
-hardware.nvidia = {
-  	modesetting.enable = true;
-	powerManagement.enable = true;
-	open = false;
-	package = config.boot.kernelPackages.nvidiaPackages.production;
-};
  
-environment.sessionVariables = {
+  environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-	"/home/user/.steam/root./compatibilitytools.d";
+	    "/home/user/.steam/root./compatibilitytools.d";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
     STEAM_USE_VULKAN = "1";
-};
+  };
  
-programs.steam.enable = true;
 
 
 
- ## fonts
-fonts.packages = with pkgs; [
-	fira-code
-	nerd-fonts.jetbrains-mono
-];
+  fonts.packages = with pkgs; [
+	  fira-code
+	  nerd-fonts.jetbrains-mono
+  ];
 
 }
 
