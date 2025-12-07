@@ -11,7 +11,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking = {
-    hostname = "nix";
+    hostName = "nix";
     networkmanager.enable = true;
   };
 
@@ -19,7 +19,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
-  nixpkgs.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.05";
 
   ## Graphics / Display / Window manager(s)
