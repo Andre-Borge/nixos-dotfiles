@@ -43,12 +43,13 @@
 	  package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
-  ## Audio
-  services.pipewire = {
+  ## Audio 
+  services.pipewire.enable = false;
+  services.pulseaudio = {
     enable = true;
-    pulse.enable = true;
+    support32Bit = true;
   };
-  services.pulseaudio.enable = false;
+
   
   ## Users
   users.users.andre = {
@@ -67,7 +68,6 @@
     unzip
     tree
     notepadqq ## notepad++ replica
-    
     ## Tools required for Telescope(vim)
     
     # language servers/languages
@@ -124,13 +124,13 @@
   services.xserver.videoDrivers = ["nvidia"];
 
  
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-	    "/home/user/.steam/root./compatibilitytools.d";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
-    STEAM_USE_VULKAN = "1";
-  };
+  # environment.sessionVariables = {
+  #  STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+	#    "/home/user/.steam/root./compatibilitytools.d";
+  #  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  #  VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
+  #  STEAM_USE_VULKAN = "1";
+  #};
  
 
 
