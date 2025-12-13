@@ -60,14 +60,12 @@
   environment.systemPackages = with pkgs; [
     wget
     librewolf
-    firefox
     kitty
     pavucontrol
     tree-sitter
     docker
     unzip
     tree
-    notepadqq ## notepad++ replica
     ## Tools required for Telescope(vim)
     
     # language servers/languages
@@ -97,8 +95,8 @@
 
     ## gaming
     mangohud # cpu, gpu etc info
-    protonup
     htop
+    protonup-ng
 ];
   ## Services
 
@@ -117,28 +115,16 @@
   };
   
 
-
-
-
-
   services.xserver.videoDrivers = ["nvidia"];
 
- 
-  # environment.sessionVariables = {
-  #  STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-	#    "/home/user/.steam/root./compatibilitytools.d";
-  #  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  #  VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
-  #  STEAM_USE_VULKAN = "1";
-  #};
- 
-
-
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+      "home/user/.steam/root/compatibilitytools.d";
+  };
 
   fonts.packages = with pkgs; [
 	  fira-code
 	  nerd-fonts.jetbrains-mono
   ];
-
 }
 

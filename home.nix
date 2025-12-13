@@ -18,9 +18,6 @@
     
 
     home.packages = with pkgs; [
-      ripgrep
-      fzf
-      fd
 
       bat
       qbittorrent
@@ -31,9 +28,12 @@
       defaultEditor = true;
       plugins = with pkgs.vimPlugins; [
         mason-nvim
-	kanagawa-nvim ## colorscheme
+        kanagawa-nvim ## colorscheme
+        LazyVim
       ];
+      extraPackages = [ pkgs.ripgrep pkgs.fzf pkgs.fd ];
     };
+    programs.fzf.enable = true;
 }
 
 

@@ -30,4 +30,6 @@ opt.laststatus = 2 -- Always show a statusline in the previously focused window
 
 vim.cmd.filetype("plugin indent on") -- Enable filetype detection, plugins, and indentation
 
-vim.cmd.colorscheme("kanagawa-wave") -- my current colorscheme, it looks nice i guess
+--vim.cmd.colorscheme("kanagawa-wave") -- my current colorscheme, it looks nice i guess
+vim.g.netrw_liststyle = 1 -- Use the long listing view
+vim.g.netrw_sort_by = "size" -- Sory files by size

@@ -28,3 +28,5 @@ keymap("n", "<leader>cd", '<cmd>lua vim.fn.chdir(vim.fn.expand("%:p:h"))<CR>')
 
 local opts = { noremap = true, silent = true }
 keymap("n", "grd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- Go to definition
+keymap("n", "<leader>ex", "<cmd>Ex %:p:h<CR>") -- Open Netrw in the current file's directory
+--keymap("n", "<leader>ps", '<cmd>lua vim.pack.update()<CR>') -- reload
