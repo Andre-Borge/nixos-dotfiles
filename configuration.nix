@@ -20,7 +20,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   ## Graphics / Display / Window manager(s)
   services.xserver = {
@@ -36,12 +36,6 @@
 	  enable32Bit = true;
   };
   
-  hardware.nvidia = {
-    modesetting.enable = true;
-	  powerManagement.enable = true;
-	  open = false;
-	  package = config.boot.kernelPackages.nvidiaPackages.production;
-  };
 
   ## Audio 
   services.pipewire.enable = false;
@@ -66,6 +60,7 @@
     docker
     unzip
     tree
+    feh
     ## Tools required for Telescope(vim)
     
     # language servers/languages
@@ -81,7 +76,10 @@
     lua
     nodejs
     python3
+    pyright
+    ruff
     go
+		gopls
     mariadb
     
    
@@ -101,30 +99,28 @@
   ## Services
 
   programs.nix-ld.enable = true;
-  programs.git.enable = true;
   programs.vim.enable = true;
   programs.gamemode.enable = true; 
-  programs.steam.enable = true;
+	programs.steam.enable = true;
+	services.postgresql.enable = true;
+	services.picom.enable = true;
 
-  services.postgresql.enable = true;
-  services.picom.enable = true;
+	services.mysql = {
+		enable = true;
+		package = pkgs.mariadb;
+	};
 
-  services.mysql = {
-    enable = true;
-    package = pkgs.mariadb;
-  };
-  
 
-  services.xserver.videoDrivers = ["nvidia"];
+	services.xserver.videoDrivers = ["amdgpu"];
 
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-      "home/user/.steam/root/compatibilitytools.d";
-  };
+	environment.sessionVariables = {
+		STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+			"home/user/.steam/root/compatibilitytools.d";
+	};
 
-  fonts.packages = with pkgs; [
-	  fira-code
-	  nerd-fonts.jetbrains-mono
-  ];
+	fonts.packages = with pkgs; [
+		fira-code
+			nerd-fonts.jetbrains-mono
+	];
 }
 

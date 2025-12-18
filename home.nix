@@ -2,7 +2,7 @@
 {
     home.username = "andre";
     home.homeDirectory = "/home/andre";
-    home.stateVersion = "25.05";  
+    home.stateVersion = "25.11";  
     programs.bash = {
       enable = true;
       
@@ -12,7 +12,7 @@
       recursive = true;
     };
     xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim/";
+      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim2/";
       recursive = true;
     };
     
@@ -34,6 +34,18 @@
       extraPackages = [ pkgs.ripgrep pkgs.fzf pkgs.fd ];
     };
     programs.fzf.enable = true;
+
+		programs.git = {
+			enable = true;
+			settings = {
+				user = {
+					name = "Andre Borge";
+					email = "andreborge1008@gmail.com";
+				};
+				init.defaultBranch = "main";
+			};
+		};
+
 }
 
 
