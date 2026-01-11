@@ -61,6 +61,7 @@
     unzip
     tree
     feh
+		xclip # to enable clipboard support for neovim
     ## Tools required for Telescope(vim)
     
     # language servers/languages
@@ -97,19 +98,17 @@
     protonup-ng
 ];
   ## Services
-
+	programs.firefox.enable = true;
   programs.nix-ld.enable = true;
   programs.vim.enable = true;
   programs.gamemode.enable = true; 
 	programs.steam.enable = true;
 	services.postgresql.enable = true;
 	services.picom.enable = true;
-
 	services.mysql = {
 		enable = true;
 		package = pkgs.mariadb;
 	};
-
 
 	services.xserver.videoDrivers = ["amdgpu"];
 

@@ -41,9 +41,7 @@ vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>d', '"_d')
-
-vim.opt.clipboard = 'unnamedplus'
-
+vim.opt.clipboard = "unnamedplus"
 vim.keymap.set('n', '<leader>a', ':split | terminal<CR>')
 vim.keymap.set('n', '<leader>st', ':set spell!<CR>')
 
