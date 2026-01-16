@@ -39,9 +39,9 @@
 
 		programs.git = {
 			enable = true;
-			settings = {
-				init.defaultBranch = "main";
-			};
+			settings.init.defaultBranch = "main";
+			settings.user.name = "Andre Borge";
+			settings.user.email = "andreborge1008@gmail.com";
 		};
 }
 

@@ -45,7 +45,6 @@
   };
 
   
-  ccccccccc
   users.users.andre = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; 
@@ -120,12 +119,12 @@
 		wlr.enable = true;
 	};
 	services.xserver.videoDrivers = ["amdgpu"];
+	boot.kernelModules = ["amdgpu"];
 
-	#environment.sessionVariables = {
-	#	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-	#		"home/user/.steam/root/compatibilitytools.d";
-	#};
-
+	environment.sessionVariables = {
+		STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+			"home/user/.steam/root/compatibilitytools.d";
+	};
 	fonts.packages = with pkgs; [
 		fira-code
 			nerd-fonts.jetbrains-mono
