@@ -5,7 +5,6 @@
     home.stateVersion = "25.11";  
     programs.bash = {
       enable = true;
-      
     };
     xdg.configFile."i3" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/i3/";
@@ -16,9 +15,12 @@
       recursive = true;
     };
     
+    xdg.configFile."sway" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/sway/";
+      recursive = true;
+    };
 
     home.packages = with pkgs; [
-
       bat
       qbittorrent
     ];
@@ -38,10 +40,6 @@
 		programs.git = {
 			enable = true;
 			settings = {
-				user = {
-					name = "Andre Borge";
-					email = "andreborge1008@gmail.com";
-				};
 				init.defaultBranch = "main";
 			};
 		};

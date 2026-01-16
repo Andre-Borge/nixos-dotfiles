@@ -27,7 +27,7 @@
     enable = true;
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
-    windowManager.i3.enable = true;
+    windowManager.i3.enable = false;
   };
   services.displayManager.ly.enable = true;
 
@@ -45,7 +45,7 @@
   };
 
   
-  ## Users
+  ccccccccc
   users.users.andre = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; 
@@ -61,7 +61,7 @@
     unzip
     tree
     feh
-		xclip # to enable clipboard support for neovim
+		xclip # to enable clipboard support for neovim on x11
     ## Tools required for Telescope(vim)
     
     # language servers/languages
@@ -96,9 +96,15 @@
     mangohud # cpu, gpu etc info
     htop
     protonup-ng
+		wofi
 ];
   ## Services
+	programs.sway = {
+		enable = true;
+		wrapperFeatures.gtk = true;
+	};
 	programs.firefox.enable = true;
+	programs.xwayland.enable = true;
   programs.nix-ld.enable = true;
   programs.vim.enable = true;
   programs.gamemode.enable = true; 
@@ -109,17 +115,22 @@
 		enable = true;
 		package = pkgs.mariadb;
 	};
-
+	xdg.portal = {
+		enable = true;
+		wlr.enable = true;
+	};
 	services.xserver.videoDrivers = ["amdgpu"];
 
-	environment.sessionVariables = {
-		STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-			"home/user/.steam/root/compatibilitytools.d";
-	};
+	#environment.sessionVariables = {
+	#	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+	#		"home/user/.steam/root/compatibilitytools.d";
+	#};
 
 	fonts.packages = with pkgs; [
 		fira-code
 			nerd-fonts.jetbrains-mono
 	];
+
+	
 }
 
