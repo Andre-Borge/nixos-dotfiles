@@ -60,23 +60,17 @@
     unzip
     tree
     feh
-		xclip # to enable clipboard support for neovim on x11
+	xclip # to enable clipboard support for neovim on x11
     ## Tools required for Telescope(vim)
     
     # language servers/languages
-    rust-analyzer # rust
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.vscode-langservers-extracted # json, html, css language servers
     nodePackages.eslint
     nodePackages.eslint_d
     lua-language-server 
-    php
-    mysql84 
-    lua
-    nodejs
-    python3
-    pyright
+	lua
     ruff
     go
 		gopls
