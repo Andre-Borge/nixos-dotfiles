@@ -60,9 +60,10 @@
     unzip
     tree
     feh
-	xclip # to enable clipboard support for neovim on x11
+		xclip # to enable clipboard support for neovim on x11
+		virtualbox
     ## Tools required for Telescope(vim)
-    
+		 
     # language servers/languages
     nodePackages.typescript
     nodePackages.typescript-language-server
@@ -70,7 +71,7 @@
     nodePackages.eslint
     nodePackages.eslint_d
     lua-language-server 
-	lua
+		lua
     ruff
     go
 		gopls
@@ -90,39 +91,53 @@
     htop
     protonup-ng
 		wofi
+		wine
+		rusty-path-of-building
+		lutris
+		pciutils
+#		openrgb
 ];
   ## Services
 	programs.sway = {
 		enable = true;
 		wrapperFeatures.gtk = true;
 	};
-	programs.firefox.enable = true;
-	programs.xwayland.enable = true;
-  programs.nix-ld.enable = true;
-  programs.vim.enable = true;
-  programs.gamemode.enable = true; 
-	programs.steam.enable = true;
-	services.postgresql.enable = true;
-	services.picom.enable = true;
-	services.mysql = {
-		enable = true;
-		package = pkgs.mariadb;
-	};
-	xdg.portal = {
-		enable = true;
-		wlr.enable = true;
-	};
-	services.xserver.videoDrivers = ["amdgpu"];
-	boot.kernelModules = ["amdgpu"];
+programs.firefox.enable = true;
+programs.xwayland.enable = true;
+programs.nix-ld.enable = true;
+programs.vim.enable = true;
+programs.gamemode.enable = true; 
+programs.gamescope.enable = true;
+programs.steam.enable = true;
+programs.appimage.enable = true;
+programs.appimage.binfmt = true;
+services.postgresql.enable = true;
+services.picom.enable = true;
+services.flatpak.enable = true;
+#services.hardware.openrgb = {
+#	enable = true;
+#	package = pkgs.openrgb-with-all-plugins;
+#	motherboard = "amd";
+#};
+#hardware.i2c.enable = true;
+xdg.portal = {
+	enable = true;
+	wlr.enable = true;
+};
+services.xserver.videoDrivers = ["amdgpu"];
+boot.kernelModules = ["amdgpu" "i2c-dev"];
 
-	environment.sessionVariables = {
-		STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-			"home/user/.steam/root/compatibilitytools.d";
-	};
-	fonts.packages = with pkgs; [
-		fira-code
-			nerd-fonts.jetbrains-mono
-	];
+environment.sessionVariables = {
+	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+		"home/user/.steam/root/compatibilitytools.d";
+};
+fonts.packages = with pkgs; [
+	fira-code
+	nerd-fonts.jetbrains-mono
+];
+
+
+
 
 	
 }

@@ -10,7 +10,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+# preferred terminal emulator
 set $term kitty
 
 input * {
@@ -20,11 +20,23 @@ input * {
 		accel_profile "flat"
 		pointer_accel 0
 }
-
+#path of exile (1) 
+for_window [class="steam_app_238960"] fullscreen global, border none 
+#overwatch
+for_window [class="steam_app_2357570"] fullscreen enable, border none
+#the finals
+for_window [class="steam_app_2073850"] fullscreen enable, border none 
+# warframe
+for_window [class="steam_app_230410"] fullscreen enable, border none 
+#torchlight II
+for_window [class="steam_app_200710"] fullscreen enable, border none 
+# civ 6 
+for_window [class="steam_app_289070"] fullscreen enable, border none
+#assign [class="steam_app_289070"] workspace 3
 # auto open apps
 #exec env DRI_PRIME=0 steam
-
-
+bindsym $mod+shift+b exec swaymsg bar mode toggle
+bindsym $mod+shift+a exec /home/andre/.local/bin/awakened-poe-trade
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
