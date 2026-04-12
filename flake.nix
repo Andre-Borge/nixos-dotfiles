@@ -2,12 +2,19 @@
   description = "A very basic flake";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
+		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { self, nixpkgs, home-manager, ... }: {
+  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }:
+	let
 	    system = "x86_64-linux";
+			pkgs = import nixpkgs { inherit system; };
+			pkgsUnstable = import nixpkgs-unstable { inherit system; };
+	in
+	{
 	    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+				inherit system;
 	      modules = [ 
 	    	  ./configuration.nix 
 		      home-manager.nixosModules.home-manager
@@ -18,6 +25,7 @@
 			        home-manager.backupFileExtension = "backup";
 		      }
         ];
+				specialArgs = { inherit pkgsUnstable; };
       };
-  };
+	};
 }

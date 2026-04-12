@@ -3,9 +3,7 @@
     home.username = "andre";
     home.homeDirectory = "/home/andre";
     home.stateVersion = "25.11";  
-    programs.bash = {
-      enable = true;
-    };
+		programs.bash = { enable = true; };
     xdg.configFile."i3" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/i3/";
       recursive = true;
@@ -20,6 +18,10 @@
       recursive = true;
     };
 
+    xdg.configFile."kitty" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/kitty/";
+      recursive = true;
+    };
     home.packages = with pkgs; [
       bat
       qbittorrent

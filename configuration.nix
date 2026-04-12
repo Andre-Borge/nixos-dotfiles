@@ -1,5 +1,5 @@
 # configuration.nix
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgsUnstable, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -50,58 +50,60 @@
     extraGroups = [ "wheel" ]; 
   };
   ## System Packages
-  environment.systemPackages = with pkgs; [
-    wget
-    librewolf
-    kitty
-    pavucontrol
-    tree-sitter
-    docker
-    unzip
-    tree
-    feh
-		xclip # to enable clipboard support for neovim on x11
-		virtualbox
+  environment.systemPackages = [
+    pkgs.wget
+    pkgs.librewolf
+    pkgs.kitty
+    pkgs.pavucontrol
+    pkgs.tree-sitter
+    pkgs.docker
+    pkgs.unzip
+    pkgs.tree
+    pkgs.feh
+		pkgs.xclip # to enable clipboard support for neovim on x11
+		pkgs.virtualbox
     ## Tools required for Telescope(vim)
 		 
     # language servers/languages
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted # json, html, css language servers
-    nodePackages.eslint
-    nodePackages.eslint_d
-    lua-language-server 
-		lua
-    ruff
-    go
-		gopls
-    mariadb
+    pkgs.nodePackages.typescript
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nodePackages.vscode-langservers-extracted # json, html, css language servers
+    pkgs.nodePackages.eslint
+    pkgs.nodePackages.eslint_d
+    pkgs.lua-language-server 
+		pkgs.lua
+    pkgs.ruff
+    pkgs.go
+		pkgs.gopls
+    pkgs.mariadb
     
    
     # programming
-    vim
-    gcc # compiler
+    pkgs.vim
+    pkgs.gcc # compiler
     
     ## torrents
-    qbittorrent 
+    pkgs.qbittorrent 
    
-
+		pkgs.lm_sensors
     ## gaming
-    mangohud # cpu, gpu etc info
-    htop
-    protonup-ng
-		wofi
-		wine
-		rusty-path-of-building
-		lutris
-		pciutils
-#		openrgb
+    pkgs.mangohud # cpu, gpu etc info
+    pkgs.htop
+    pkgs.protonup-ng
+		pkgs.wofi
+		pkgs.wine
+		pkgs.lutris
+		pkgs.pciutils
+	#	openrgb
+		pkgs.i2c-tools
+		pkgsUnstable.rusty-path-of-building
+
 ];
   ## Services
-	programs.sway = {
-		enable = true;
-		wrapperFeatures.gtk = true;
-	};
+programs.sway = {
+	enable = true;
+	wrapperFeatures.gtk = true;
+};
 programs.firefox.enable = true;
 programs.xwayland.enable = true;
 programs.nix-ld.enable = true;
@@ -114,19 +116,20 @@ programs.appimage.binfmt = true;
 services.postgresql.enable = true;
 services.picom.enable = true;
 services.flatpak.enable = true;
-#services.hardware.openrgb = {
-#	enable = true;
-#	package = pkgs.openrgb-with-all-plugins;
-#	motherboard = "amd";
-#};
+services.udev.packages = [ pkgs.openrgb ];
+services.hardware.openrgb = {
+	enable = true;
+	package = pkgs.openrgb-with-all-plugins;
+	motherboard = "amd";
+};
 #hardware.i2c.enable = true;
 xdg.portal = {
 	enable = true;
 	wlr.enable = true;
 };
 services.xserver.videoDrivers = ["amdgpu"];
-boot.kernelModules = ["amdgpu" "i2c-dev"];
-
+boot.kernelModules = ["amdgpu" "i2c-dev" "i2c-piix4" "i2c-nct6775"];
+boot.kernelParams = [ "acpi_enforce_resources=lax" ];
 environment.sessionVariables = {
 	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
 		"home/user/.steam/root/compatibilitytools.d";

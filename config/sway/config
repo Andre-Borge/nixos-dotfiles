@@ -31,7 +31,14 @@ for_window [class="steam_app_230410"] fullscreen enable, border none
 #torchlight II
 for_window [class="steam_app_200710"] fullscreen enable, border none 
 # civ 6 
-for_window [class="steam_app_289070"] fullscreen enable, border none
+for_window [class="steam_app_Maisstivelse289070"] fullscreen enable, border none
+for_window [class="steam_app_730"] fullscreen enable, border none
+for_window [class="steam_app_960090"] fullscreen enable, border none
+for_window [class="steam_app_1604030"] fullscreen enable, border none
+for_window [class="steam_app_2767030"] fullscreen enable, border none
+for_window [class="steam_app_2767030"] fullscreen enable, border none
+
+
 #assign [class="steam_app_289070"] workspace 3
 # auto open apps
 #exec env DRI_PRIME=0 steam
@@ -168,6 +175,7 @@ bar {
 		height 25px
 		font pango:Fira Code Regular 9
 		status_padding 10
+		
 }
 
 
