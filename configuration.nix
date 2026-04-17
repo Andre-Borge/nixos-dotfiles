@@ -51,6 +51,7 @@
   };
   ## System Packages
   environment.systemPackages = [
+		pkgs.unrar
     pkgs.wget
     pkgs.librewolf
     pkgs.kitty
@@ -76,6 +77,7 @@
     pkgs.go
 		pkgs.gopls
     pkgs.mariadb
+		pkgs.openssl # cryptographic libary
     
    
     # programming
