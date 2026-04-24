@@ -1,5 +1,5 @@
 # configuration.nix
-{ config, lib, pkgs, pkgsUnstable, ... }:
+{ config, lib, pkgs, pkgsUnstable, freesmlauncher, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -51,6 +51,8 @@
   };
   ## System Packages
   environment.systemPackages = [
+		freesmlauncher.packages.${pkgs.system}.default
+		pkgs.jdk21
 		pkgs.unrar
     pkgs.wget
     pkgs.librewolf
@@ -130,6 +132,7 @@ xdg.portal = {
 	wlr.enable = true;
 };
 services.xserver.videoDrivers = ["amdgpu"];
+boot.kernelPackages = pkgs.linuxPackages_latest;
 boot.kernelModules = ["amdgpu" "i2c-dev" "i2c-piix4" "i2c-nct6775"];
 boot.kernelParams = [ "acpi_enforce_resources=lax" ];
 environment.sessionVariables = {

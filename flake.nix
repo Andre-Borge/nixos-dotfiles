@@ -5,8 +5,17 @@
 		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+		freesmlauncher = {
+			url = "github:FreesmTeam/FreesmLauncher";
+			inputs = {
+				nixpkgs = {
+					follows = "nixpkgs";
+				};
+			};
+		};
   };
-  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }:
+  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, freesmlauncher,  ... }:
 	let
 	    system = "x86_64-linux";
 			pkgs = import nixpkgs { inherit system; };
@@ -25,7 +34,7 @@
 			        home-manager.backupFileExtension = "backup";
 		      }
         ];
-				specialArgs = { inherit pkgsUnstable; };
+				specialArgs = { inherit pkgsUnstable freesmlauncher; };
       };
 	};
 }
