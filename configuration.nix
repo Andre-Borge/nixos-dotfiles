@@ -52,7 +52,8 @@
   ## System Packages
   environment.systemPackages = [
 		freesmlauncher.packages.${pkgs.system}.default
-		pkgs.jdk21
+		pkgs.i3status
+		pkgs.jdk25 
 		pkgs.unrar
     pkgs.wget
     pkgs.librewolf

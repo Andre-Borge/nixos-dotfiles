@@ -22,6 +22,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/kitty/";
       recursive = true;
     };
+    xdg.configFile."i3status" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/sway/i3status/";
+      recursive = true;
+    };
     home.packages = with pkgs; [
       bat
       qbittorrent
