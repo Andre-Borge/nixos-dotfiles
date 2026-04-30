@@ -1,10 +1,10 @@
 general {
     colors = true
-    interval = 1
+    interval = 60
 }
 
 order += "tztime local"
 
 tztime local {
-    format = "%Y-%m-%d %H:%M:%S"
+    format = "%H:%M %Y-%m-%d"
 }
