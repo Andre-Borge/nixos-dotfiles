@@ -1,4 +1,3 @@
-# configuration.nix
 { config, lib, pkgs, pkgsUnstable, freesmlauncher, ... }:
 {
   imports =

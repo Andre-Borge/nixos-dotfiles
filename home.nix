@@ -9,7 +9,7 @@
       recursive = true;
     };
     xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim2/";
+      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim/";
       recursive = true;
     };
     
