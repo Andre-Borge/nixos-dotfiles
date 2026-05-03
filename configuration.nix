@@ -2,7 +2,7 @@
 {
   imports = [ 
       ./hardware-configuration.nix
-			./config/rgb/default.nix
+      ./config/rgb/default.nix
   ];
 
   ## Boot / System basics
@@ -31,10 +31,9 @@
   services.displayManager.ly.enable = true;
 
   hardware.graphics = {
-	  enable = true;
-	  enable32Bit = true;
+    enable = true;
+    enable32Bit = true;
   };
-  
 
   ## Audio 
   services.pipewire.enable = false;
@@ -43,17 +42,16 @@
     support32Bit = true;
   };
 
-  
   users.users.andre = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; 
   };
   ## System Packages
   environment.systemPackages = [
-		freesmlauncher.packages.${pkgs.system}.default
-		pkgs.i3status
-		pkgs.jdk25 
-		pkgs.unrar
+    freesmlauncher.packages.${pkgs.system}.default
+    pkgs.i3status
+    pkgs.jdk25 
+    pkgs.unrar
     pkgs.wget
     pkgs.librewolf
     pkgs.kitty
@@ -63,10 +61,9 @@
     pkgs.unzip
     pkgs.tree
     pkgs.feh
-		pkgs.xclip # to enable clipboard support for neovim on x11
-		pkgs.virtualbox
+    pkgs.xclip # to enable clipboard support for neovim on x11
+    pkgs.virtualbox
     ## Tools required for Telescope(vim)
-		 
     # language servers/languages
     pkgs.nodePackages.typescript
     pkgs.nodePackages.typescript-language-server
@@ -74,38 +71,34 @@
     pkgs.nodePackages.eslint
     pkgs.nodePackages.eslint_d
     pkgs.lua-language-server 
-		pkgs.lua
+    pkgs.lua
     pkgs.ruff
     pkgs.go
-		pkgs.gopls
+    pkgs.gopls
     pkgs.mariadb
-		pkgs.openssl # cryptographic libary
-    
-   
+    pkgs.openssl # cryptographic libary
     # programming
     pkgs.vim
     pkgs.gcc # compiler
-    
     ## torrents
     pkgs.qbittorrent 
-   
-		pkgs.lm_sensors
+    pkgs.lm_sensors
     ## gaming
     pkgs.mangohud # cpu, gpu etc info
     pkgs.htop
     pkgs.protonup-ng
-		pkgs.wofi
-		pkgs.wine
-		pkgs.lutris
-		pkgs.pciutils
-		pkgs.i2c-tools
-		pkgsUnstable.rusty-path-of-building
+    pkgs.wofi
+    pkgs.wine
+    pkgs.lutris
+    pkgs.pciutils
+    pkgs.i2c-tools
+    pkgsUnstable.rusty-path-of-building
 
 ];
   ## Services
 programs.sway = {
-	enable = true;
-	wrapperFeatures.gtk = true;
+  enable = true;
+  wrapperFeatures.gtk = true;
 };
 programs.firefox.enable = true;
 programs.xwayland.enable = true;
@@ -120,24 +113,20 @@ services.postgresql.enable = true;
 services.picom.enable = true;
 services.flatpak.enable = true;
 xdg.portal = {
-	enable = true;
-	wlr.enable = true;
+  enable = true;
+  wlr.enable = true;
 };
 services.xserver.videoDrivers = ["amdgpu"];
 boot.kernelPackages = pkgs.linuxPackages_latest;
 boot.kernelModules = ["amdgpu"];
 environment.sessionVariables = {
-	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-		"home/user/.steam/root/compatibilitytools.d";
+  STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+    "home/user/.steam/root/compatibilitytools.d";
 };
 fonts.packages = with pkgs; [
-	fira-code
-	nerd-fonts.jetbrains-mono
+  fira-code
+  nerd-fonts.jetbrains-mono
 ];
 
-
-
-
-	
 }
 

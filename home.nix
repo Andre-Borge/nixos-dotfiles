@@ -3,7 +3,7 @@
     home.username = "andre";
     home.homeDirectory = "/home/andre";
     home.stateVersion = "25.11";  
-		programs.bash = { enable = true; };
+    programs.bash = { enable = true; };
     xdg.configFile."i3" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/i3/";
       recursive = true;
@@ -12,7 +12,7 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim/";
       recursive = true;
     };
-    
+
     xdg.configFile."sway" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/sway/";
       recursive = true;
@@ -43,12 +43,12 @@
     };
     programs.fzf.enable = true;
 
-		programs.git = {
-			enable = true;
-			settings.init.defaultBranch = "main";
-			settings.user.name = "Andre Borge";
-			settings.user.email = "andreborge1008@gmail.com";
-		};
+    programs.git = {
+      enable = true;
+      settings.init.defaultBranch = "main";
+      settings.user.name = "Andre Borge";
+      settings.user.email = "andreborge1008@gmail.com";
+    };
 }
 
 
