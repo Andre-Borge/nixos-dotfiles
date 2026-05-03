@@ -1,9 +1,9 @@
 { config, lib, pkgs, pkgsUnstable, freesmlauncher, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ 
       ./hardware-configuration.nix
-    ];
+			./config/rgb/default.nix
+  ];
 
   ## Boot / System basics
 
@@ -98,7 +98,6 @@
 		pkgs.wine
 		pkgs.lutris
 		pkgs.pciutils
-	#	openrgb
 		pkgs.i2c-tools
 		pkgsUnstable.rusty-path-of-building
 
@@ -120,21 +119,13 @@ programs.appimage.binfmt = true;
 services.postgresql.enable = true;
 services.picom.enable = true;
 services.flatpak.enable = true;
-services.udev.packages = [ pkgs.openrgb ];
-services.hardware.openrgb = {
-	enable = true;
-	package = pkgs.openrgb-with-all-plugins;
-	motherboard = "amd";
-};
-#hardware.i2c.enable = true;
 xdg.portal = {
 	enable = true;
 	wlr.enable = true;
 };
 services.xserver.videoDrivers = ["amdgpu"];
 boot.kernelPackages = pkgs.linuxPackages_latest;
-boot.kernelModules = ["amdgpu" "i2c-dev" "i2c-piix4" "i2c-nct6775"];
-boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+boot.kernelModules = ["amdgpu"];
 environment.sessionVariables = {
 	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
 		"home/user/.steam/root/compatibilitytools.d";
