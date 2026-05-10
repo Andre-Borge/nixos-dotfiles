@@ -36,11 +36,13 @@
   };
 
   ## Audio 
-  services.pipewire.enable = false;
-  services.pulseaudio = {
+  services.pipewire = {
     enable = true;
-    support32Bit = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    jack.enable = true;
   };
+  hardware.pulseaudio.enable = false;
 
   users.users.andre = {
     isNormalUser = true;
@@ -49,6 +51,7 @@
   ## System Packages
   environment.systemPackages = [
     freesmlauncher.packages.${pkgs.system}.default
+    pkgs.easyeffects
     pkgs.i3status
     pkgs.jdk25 
     pkgs.unrar
