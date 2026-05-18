@@ -19,7 +19,7 @@
   let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      pkgsUnstable = import nixpkgs-unstable { inherit system; };
+      pkgsUnstable = import nixpkgs-unstable { inherit system; config.allowUnfree = true; };
   in
   {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {

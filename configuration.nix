@@ -4,7 +4,10 @@
       ./hardware-configuration.nix
       ./config/rgb/default.nix
   ];
-
+  networking.wireguard.enable = true;
+  networking.wg-quick.interfaces.protonvpn = {
+    configFile = "/etc/wireguard/protonvpn.conf";
+  };
   ## Boot / System basics
 
   boot.loader.systemd-boot.enable = true;
@@ -51,6 +54,8 @@
   ## System Packages
   environment.systemPackages = [
     freesmlauncher.packages.${pkgs.system}.default
+    pkgsUnstable.proton-vpn
+    pkgsUnstable.wireguard-tools
     pkgs.easyeffects
     pkgs.i3status
     pkgs.jdk25 
@@ -92,7 +97,7 @@
     pkgs.protonup-ng
     pkgs.wofi
     pkgs.wine
-    pkgs.lutris
+    pkgsUnstable.heroic
     pkgs.pciutils
     pkgs.i2c-tools
     pkgsUnstable.rusty-path-of-building
