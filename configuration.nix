@@ -5,9 +5,9 @@
       ./config/rgb/default.nix
   ];
   networking.wireguard.enable = true;
-  networking.wg-quick.interfaces.protonvpn = {
-    configFile = "/etc/wireguard/protonvpn.conf";
-  };
+##  networking.wg-quick.interfaces.protonvpn = {
+##   configFile = "/etc/wireguard/protonvpn.conf";
+##  };
   ## Boot / System basics
 
   boot.loader.systemd-boot.enable = true;
@@ -54,8 +54,9 @@
   ## System Packages
   environment.systemPackages = [
     freesmlauncher.packages.${pkgs.system}.default
-    pkgsUnstable.proton-vpn
-    pkgsUnstable.wireguard-tools
+    ##pkgsUnstable.proton-vpn
+    ##pkgsUnstable.wireguard-tools
+    pkgs.vulkan-tools
     pkgs.easyeffects
     pkgs.i3status
     pkgs.jdk25 
@@ -84,6 +85,8 @@
     pkgs.go
     pkgs.gopls
     pkgs.mariadb
+    pkgs.lsfg-vk-ui
+    pkgs.lsfg-vk
     pkgs.openssl # cryptographic libary
     # programming
     pkgs.vim
