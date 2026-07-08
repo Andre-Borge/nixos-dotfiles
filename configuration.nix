@@ -4,7 +4,7 @@
       ./hardware-configuration.nix
       ./config/rgb/default.nix
   ];
-  networking.wireguard.enable = true;
+#  networking.wireguard.enable = true;
 ##  networking.wg-quick.interfaces.protonvpn = {
 ##   configFile = "/etc/wireguard/protonvpn.conf";
 ##  };
@@ -22,7 +22,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
   nixpkgs.config.allowUnfree = true;
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   ## Graphics / Display / Window manager(s)
   services.xserver = {
@@ -56,10 +56,14 @@
     freesmlauncher.packages.${pkgs.system}.default
     ##pkgsUnstable.proton-vpn
     ##pkgsUnstable.wireguard-tools
+    pkgs.wl-clipboard
+    pkgs.grim
+    pkgs.slurp
     pkgs.vulkan-tools
     pkgs.easyeffects
     pkgs.i3status
     pkgs.jdk25 
+    pkgs.jdk21
     pkgs.unrar
     pkgs.wget
     pkgs.librewolf
@@ -74,11 +78,6 @@
     pkgs.virtualbox
     ## Tools required for Telescope(vim)
     # language servers/languages
-    pkgs.nodePackages.typescript
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.vscode-langservers-extracted # json, html, css language servers
-    pkgs.nodePackages.eslint
-    pkgs.nodePackages.eslint_d
     pkgs.lua-language-server 
     pkgs.lua
     pkgs.ruff
@@ -126,6 +125,10 @@ services.flatpak.enable = true;
 xdg.portal = {
   enable = true;
   wlr.enable = true;
+
+  extraPortals = with pkgs; [
+    xdg-desktop-portal-gtk
+  ];
 };
 services.xserver.videoDrivers = ["amdgpu"];
 boot.kernelPackages = pkgs.linuxPackages_latest;

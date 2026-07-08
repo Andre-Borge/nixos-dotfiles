@@ -2,15 +2,15 @@
 {
     home.username = "andre";
     home.homeDirectory = "/home/andre";
-    home.stateVersion = "25.11";  
+    home.stateVersion = "26.05";  
     programs.bash = { enable = true; };
     xdg.configFile."i3" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/i3/";
       recursive = true;
     };
     xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim/";
-      recursive = true;
+     source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/nvim2/";
+     recursive = true;
     };
 
     xdg.configFile."sway" = {
@@ -34,12 +34,7 @@
     programs.neovim = {
       enable = true;
       defaultEditor = true;
-      plugins = with pkgs.vimPlugins; [
-        mason-nvim
-        kanagawa-nvim ## colorscheme
-        LazyVim
-      ];
-      extraPackages = [ pkgs.ripgrep pkgs.fzf pkgs.fd ];
+      sideloadInitLua = true; #seems needed to make init.lua work? 
     };
     programs.fzf.enable = true;
 

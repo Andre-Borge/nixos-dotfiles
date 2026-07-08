@@ -1,6 +1,37 @@
-require("core.lazy")
-require("core.lsp")
+vim.pack.add({
+  "https://github.com/folke/tokyonight.nvim",
+  { src = "https://github.com/kdheepak/lazygit.nvim", name = "lazygit" },
+  {
+    src = "https://github.com/neovim/nvim-lspconfig",
+    name = "lspconfig",
+    version = "v2.9.0"
+  }
+})
+
+
+tokyonight = require("tokyonight")
+lazygit = require("lazygit")
+lspconfig = require("lspconfig")
+
+tokyonight.setup({
+  style = "night",
+  transparent = true
+})
+
+vim.cmd[[colorscheme tokyonight]]
+
+vim.opt.autocomplete = true
+
+vim.lsp.config["gopls"] = {
+
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gosum"}
+}
+
+vim.lsp.enable({"gopls"})
+
 vim.opt.autoindent = true
+vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -24,17 +55,9 @@ vim.opt.inccommand = 'split'
 
 vim.opt.undofile = true
 
-vim.cmd [[
-	iabbrev @@ your@email.com
-]]
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
---vim.keymap.set('i', '(',  '()<Esc>i')
---vim.keymap.set('i', '{',  '{{<Esc>i')
---vim.keymap.set('i', '[',  '[[<Esc>i')
-
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -60,7 +83,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.keymap.set('v', "<leader>'", "c''<Esc>P")
 vim.keymap.set('v', '<leader>"', 'c""<Esc>P')
-
-vim.cmd[[colorscheme tokyonight]]
-
-

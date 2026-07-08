@@ -1,3 +1,4 @@
+include /etc/sway/config.d/*
 output HDMI-A-1 mode 1920x1080@239.760Hz pos 0,0 
 output DP-2 mode 2560x1440@143.999Hz pos -2560,0
 workspace 1 output HDMI-A-1
@@ -39,7 +40,8 @@ bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@
 bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
 bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 ### Output configuration
-
+#bindsym grave exec sh -c 'grim -g "$(slurp)" - | wl-copy'
+bindsym $mod+shift+g exec sh -c 'grim -g "$(slurp)" - | wl-copy'
 ### Key bindings
 # Basics:
     # Start a terminal
