@@ -1,5 +1,4 @@
-{ config, lib, pkgs, pkgsUnstable, freesmlauncher, ... }:
-{
+{ config, lib, pkgs, pkgsUnstable, freesmlauncher, ... }: {
   imports = [ 
       ./hardware-configuration.nix
       ./config/rgb/default.nix
@@ -56,6 +55,7 @@
     freesmlauncher.packages.${pkgs.system}.default
     ##pkgsUnstable.proton-vpn
     ##pkgsUnstable.wireguard-tools
+    pkgs.python3
     pkgs.wl-clipboard
     pkgs.grim
     pkgs.slurp
@@ -116,11 +116,15 @@ programs.nix-ld.enable = true;
 programs.vim.enable = true;
 programs.gamemode.enable = true; 
 programs.gamescope.enable = true;
-programs.steam.enable = true;
+programs.steam = {
+  enable = true;
+  extraCompatPackages = with pkgs; [
+    proton-ge-bin
+  ];
+};
 programs.appimage.enable = true;
 programs.appimage.binfmt = true;
 services.postgresql.enable = true;
-services.picom.enable = true;
 services.flatpak.enable = true;
 xdg.portal = {
   enable = true;
@@ -132,11 +136,13 @@ xdg.portal = {
 };
 services.xserver.videoDrivers = ["amdgpu"];
 boot.kernelPackages = pkgs.linuxPackages_latest;
+boot.kernelParams = ["clearcpuid=umip"];
 boot.kernelModules = ["amdgpu"];
 environment.sessionVariables = {
   STEAM_EXTRA_COMPAT_TOOLS_PATHS =
     "home/user/.steam/root/compatibilitytools.d";
 };
+
 fonts.packages = with pkgs; [
   fira-code
   nerd-fonts.jetbrains-mono

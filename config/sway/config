@@ -30,19 +30,13 @@ for_window [class="steam_app_*"] fullscreen enable, border none
 # auto open apps
 #exec env DRI_PRIME=0 steam
 bindsym $mod+shift+b exec swaymsg bar mode toggle
-bindsym $mod+shift+a exec /home/andre/.local/bin/awakened-poe-trade
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
 set $menu wofi --show=drun
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
 bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
 bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
 bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 ### Output configuration
-#bindsym grave exec sh -c 'grim -g "$(slurp)" - | wl-copy'
-bindsym $mod+shift+g exec sh -c 'grim -g "$(slurp)" - | wl-copy'
-### Key bindings
+bindsym $mod+shift+g exec slurp | grim -g - - | tee ~/Pictures/$(date +%s).png | wl-copy
 # Basics:
     # Start a terminal
     bindsym $mod+Return exec $term
@@ -152,7 +146,7 @@ bindsym $mod+shift+g exec sh -c 'grim -g "$(slurp)" - | wl-copy'
 
  
 }
-exec swayidle -w timeout 600 'systemctl suspend' 
+#exec swayidle -w timeout 600 'systemctl suspend' 
 bar {
     position bottom
 		status_command i3status
