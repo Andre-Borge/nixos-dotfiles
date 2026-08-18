@@ -129,8 +129,7 @@ services.flatpak.enable = true;
 xdg.portal = {
   enable = true;
   wlr.enable = true;
-
-  extraPortals = with pkgs; [
+extraPortals = with pkgs; [
     xdg-desktop-portal-gtk
   ];
 };
@@ -148,5 +147,10 @@ fonts.packages = with pkgs; [
   nerd-fonts.jetbrains-mono
 ];
 
-}
+nix.gc = {
+  automatic = true;
+  dates = "weekly";
+  options = "--delete-older-than 30d";
+};
 
+}
