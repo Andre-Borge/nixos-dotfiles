@@ -48,7 +48,7 @@ The system configuration is in `~/nixos-dotfiles` rather than the default `/etc/
 To apply system updates and rebuild the environment
 
 ```bash
-sudo nixos-rebuild switch --flake ~/nixos-dotfiles#<nixosConfigurations.nixos>
+sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos>
 ```
-> Make sure the `nixosConfigurations.nixos` corresponds to what you have set in flake.nix(eg. nixosconfigurations.example would be #example) 
+> Make sure the `#nixos` corresponds to what you have set in flake.nix(eg. nixosConfigurations.example would be #example) 
 
