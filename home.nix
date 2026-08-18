@@ -26,10 +26,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "/home/andre/nixos-dotfiles/config/sway/i3status/";
       recursive = true;
     };
-    home.packages = with pkgs; [
-      bat
-      qbittorrent
-    ];
 
     programs.neovim = {
       enable = true;
