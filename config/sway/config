@@ -6,14 +6,11 @@ workspace 2 output DP-2
 workspace 3 output HDMI-A-1
 output HDMI-A-1 adaptive_sync off
 output DP-2 adaptive_sync off
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# preferred terminal emulator
 set $term kitty
 input type:keyboard {
     xkb_options caps:none
@@ -41,7 +38,7 @@ bindsym $mod+shift+g exec slurp | grim -g - - | tee ~/Pictures/$(date +%s).png |
     # Start a terminal
     bindsym $mod+Return exec $term
 
-		bindsym $mod+Shift+s exec env DRI_PRIME=0 steam
+bindsym $mod+Shift+s exec env DRI_PRIME=0 steam
 
     # Kill focused window
     bindsym $mod+q kill
