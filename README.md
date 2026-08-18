@@ -8,6 +8,7 @@ A reproducible, desktop-focused NixOS setup managed using **Nix Flakes** and **H
 - **RAM:** 32 GB DDR5
 - **Window Manager:** Sway (Wayland)
 - **Monitors:** Dual display setup (1920x1080p @ 244Hz, 1440p @ 144Hz)
+- **OS:** NixOs 26.05 (Yarara)
 
 ## Configuration
 
