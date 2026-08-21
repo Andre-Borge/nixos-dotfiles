@@ -48,7 +48,7 @@
 
   users.users.andre = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; 
+    extraGroups = [ "wheel" "libvirtd" ]; 
   };
   ## System Packages
   environment.systemPackages = [
@@ -110,6 +110,9 @@ programs.sway = {
   enable = true;
   wrapperFeatures.gtk = true;
 };
+virtualisation.libvirtd.enable = true;
+programs.virt-manager.enable = true;
+
 programs.firefox.enable = true;
 programs.xwayland.enable = true;
 programs.nix-ld.enable = true;
